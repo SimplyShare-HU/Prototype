@@ -177,3 +177,152 @@ function addCollaboration() {
     collabSection.appendChild(collabDiv);
     showNotification("Collaboration added successfully!");
 }
+// Sample static data (this would eventually come from a backend or form submission)
+const studyGuides = [
+  {
+    title: "Marketing 101 Midterm Summary",
+    university: "HU University",
+    faculty: "Business",
+    course: "Marketing 101",
+    subject: "Economics",
+    language: "English",
+    format: "PDF",
+    level: "Bachelor",
+    downloads: 128,
+    rating: 4.0
+  },
+  {
+    title: "Intro to Programming Notes",
+    university: "Utrecht University",
+    faculty: "Engineering",
+    course: "Software Design",
+    subject: "Computer Science",
+    language: "English",
+    format: "Notes",
+    level: "Bachelor",
+    downloads: 75,
+    rating: 5.0
+  }
+];
+
+function renderStudyGuides(data) {
+  const container = document.getElementById("study-guide-list");
+  container.innerHTML = "";
+
+  data.forEach(guide => {
+    const card = document.createElement("div");
+    card.className = "guide-card";
+    card.innerHTML = `
+      <h3>${guide.title}</h3>
+      <p><strong>University:</strong> ${guide.university}</p>
+      <p><strong>Course:</strong> ${guide.course}</p>
+      <p><strong>Subject:</strong> ${guide.subject}</p>
+      <p><strong>Format:</strong> ${guide.format}</p>
+      <p><strong>Downloads:</strong> ${guide.downloads} | <strong>Rating:</strong> ${"⭐".repeat(Math.floor(guide.rating))}</p>
+      <button class="download-btn">Download</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function applyFiltersAndSort() {
+  let filtered = [...studyGuides];
+
+  const university = document.getElementById("university-filter").value;
+  const faculty = document.getElementById("faculty-filter").value;
+  const course = document.getElementById("course-filter").value;
+  const subject = document.getElementById("subject-filter").value;
+  const language = document.getElementById("language-filter").value;
+  const format = document.getElementById("format-filter").value;
+  const level = document.getElementById("level-filter").value;
+  const sortBy = document.getElementById("sort-options").value;
+
+  filtered = filtered.filter(guide => {
+    return (
+      (university === "All Universities" || guide.university === university) &&
+      (faculty === "All Faculties" || guide.faculty === faculty) &&
+      (course === "All Courses" || guide.course === course) &&
+      (subject === "All Subjects" || guide.subject === subject) &&
+      (language === "All Languages" || guide.language === language) &&
+      (format === "All Formats" || guide.format === format) &&
+      (level === "All Levels" || guide.level === level)
+    );
+  });
+
+  if (sortBy === "downloads") {
+    filtered.sort((a, b) => b.downloads - a.downloads);
+  } else if (sortBy === "rating") {
+    filtered.sort((a, b) => b.rating - a.rating);
+  } else if (sortBy === "newest") {
+    // assuming newer entries are last in the array
+    filtered.reverse();
+  }
+
+  renderStudyGuides(filtered);
+}
+
+// Attach events to filters and sort
+["university-filter", "faculty-filter", "course-filter", "subject-filter", "language-filter", "format-filter", "level-filter", "sort-options"].forEach(id => {
+  document.getElementById(id).addEventListener("change", applyFiltersAndSort);
+});
+
+// Initial render
+document.addEventListener("DOMContentLoaded", () => {
+  renderStudyGuides(studyGuides);
+});
+document.getElementById("upload-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const statusDiv = document.getElementById("upload-status");
+  const title = document.getElementById("guide-title").value;
+  const university = document.getElementById("university").value;
+  const course = document.getElementById("course").value;
+  const subject = document.getElementById("subject").value;
+  const format = document.getElementById("format").value;
+  const file = document.getElementById("file-upload").files[0];
+
+  if (!file) {
+    statusDiv.innerText = "Please select a file.";
+    return;
+  }
+
+  // Simulate upload process
+  const reader = new FileReader();
+  reader.onload = function() {
+    statusDiv.innerText = `Study Guide "${title}" uploaded successfully!`;
+    // Here you'd normally send the file and metadata to a backend or Firebase
+  };
+  reader.readAsDataURL(file);
+});
+// Toggle upload form dropdown
+document.getElementById("upload-toggle").addEventListener("click", function() {
+  const dropdown = document.getElementById("upload-dropdown");
+  // Toggle the 'hidden' class
+  dropdown.classList.toggle("hidden");
+});
+
+// Existing upload form logic
+document.getElementById("upload-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const statusDiv = document.getElementById("upload-status");
+  const title = document.getElementById("guide-title").value;
+  const university = document.getElementById("university").value;
+  const course = document.getElementById("course").value;
+  const subject = document.getElementById("subject").value;
+  const format = document.getElementById("format").value;
+  const file = document.getElementById("file-upload").files[0];
+
+  if (!file) {
+    statusDiv.innerText = "Please select a file.";
+    return;
+  }
+
+  // Simulate upload process (replace with actual upload logic)
+  const reader = new FileReader();
+  reader.onload = function() {
+    statusDiv.innerText = `Study Guide "${title}" uploaded successfully!`;
+    // Here you would normally send the file and metadata to a backend service
+  };
+  reader.readAsDataURL(file);
+});
