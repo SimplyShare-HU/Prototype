@@ -181,6 +181,113 @@
 
     <div id="events-list"></div>
 </section>
+<section id="collaborations" class="tab-content">
+  <h2>Study Guide Marketplace</h2>
+<!-- Upload Dropdown Button -->
+<button id="upload-toggle" class="upload-toggle-btn">
+  <i class="fas fa-upload"></i> Upload Your Study Guide
+</button>
+
+<!-- Hidden Upload Form -->
+<div id="upload-dropdown" class="upload-dropdown hidden">
+  <h3>Upload Your Study Guide</h3>
+  <form id="upload-form">
+    <input type="text" id="guide-title" placeholder="Title" required><br>
+    <input type="text" id="university" placeholder="University" required><br>
+    <input type="text" id="course" placeholder="Course" required><br>
+    <input type="text" id="subject" placeholder="Subject" required><br>
+    <select id="format">
+      <option value="PDF">PDF</option>
+      <option value="Notes">Notes</option>
+      <option value="Flashcards">Flashcards</option>
+    </select><br>
+    <input type="file" id="file-upload" accept=".pdf,.docx,.txt" required><br>
+    <button type="submit">Upload</button>
+  </form>
+  <div id="upload-status"></div>
+</div>
+
+  <!-- Filters Bar -->
+  <div class="filters-bar">
+    <select id="university-filter">
+      <option>All Universities</option>
+      <option>HU University</option>
+      <option>Utrecht University</option>
+    </select>
+    <select id="faculty-filter">
+      <option>All Faculties</option>
+      <option>Business</option>
+      <option>Engineering</option>
+      <option>Health</option>
+    </select>
+    <select id="course-filter">
+      <option>All Courses</option>
+      <option>Marketing 101</option>
+      <option>Software Design</option>
+    </select>
+    <select id="subject-filter">
+      <option>All Subjects</option>
+      <option>Economics</option>
+      <option>Computer Science</option>
+    </select>
+    <select id="language-filter">
+      <option>All Languages</option>
+      <option>English</option>
+      <option>Dutch</option>
+    </select>
+    <select id="format-filter">
+      <option>All Formats</option>
+      <option>PDF</option>
+      <option>Notes</option>
+      <option>Flashcards</option>
+    </select>
+    <select id="level-filter">
+      <option>All Levels</option>
+      <option>Bachelor</option>
+      <option>Master</option>
+      <option>PhD</option>
+    </select>
+  </div>
+
+  <!-- Sort Bar -->
+  <div class="sort-bar">
+    <label for="sort-options">Sort by:</label>
+    <select id="sort-options">
+      <option value="relevant">Most Relevant</option>
+      <option value="downloads">Most Downloads</option>
+      <option value="rating">Highest Rating</option>
+      <option value="newest">Newest</option>
+      <option value="verified">Verified Authors</option>
+    </select>
+  </div>
+
+  <!-- Study Guides Grid -->
+  <div id="study-guide-list" class="guide-grid">
+    <!-- Sample Guide Card -->
+    <div class="guide-card">
+      <h3>Marketing 101 Midterm Summary</h3>
+      <p><strong>University:</strong> HU University</p>
+      <p><strong>Course:</strong> Marketing 101</p>
+      <p><strong>Subject:</strong> Economics</p>
+      <p><strong>Format:</strong> PDF</p>
+      <p><strong>Downloads:</strong> 128 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+      <button class="download-btn">Download</button>
+    </div>
+
+    <div class="guide-card">
+      <h3>Intro to Programming Notes</h3>
+      <p><strong>University:</strong> Utrecht University</p>
+      <p><strong>Course:</strong> Software Design</p>
+      <p><strong>Subject:</strong> Computer Science</p>
+      <p><strong>Format:</strong> Notes</p>
+      <p><strong>Downloads:</strong> 75 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+      <button class="download-btn">Download</button>
+    </div>
+  </div>
+</section>
+
+
+
 
 <footer>
     <p>&copy; 2025 Student Hub. All rights reserved.</p>
