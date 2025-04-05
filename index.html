@@ -3,48 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Hub</title>
+    <title>NoteNest</title>
     <link rel="stylesheet" href="styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-	<button class="login-btn">Log In / Sign Up</button>
+<div class="floating-shapes">
+  <div class="shape shape1"></div>
+  <div class="shape shape2"></div>
+</div>
+  <!-- Small Profile Card -->
+<div class="header-profile-card" id="user-profile-card">
 
-    <h1>Student Hub</h1>
+    <p id="user-name-display">Not logged in</p>
+    <p id="uploaded-guides-count">Guides: 0</p>
+    <p id="average-rating-display">Rating: N/A</p>
+	<p id="points-display">Points: 0</p>
+
+  </div>
+<header>
+  <button class="login-btn" onclick="toggleUserModal()">Log In / Profile</button>
+
+
+
+    <h1>NoteNest</h1>
     <nav>
         <ul>
             <li><a href="#home" onclick="showTab('home')"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#events" onclick="showTab('events')"><i class="fas fa-calendar-alt"></i> Events</a></li>
-            <li><a href="#collaborations" onclick="showTab('collaborations')"><i class="fas fa-users"></i> Collaborations</a></li>
+            
+            <li><a href="#collaborations" onclick="showTab('collaborations')"><i class="fas fa-users"></i>Study Guides</a></li>
+			<li><a href="#buy" onclick="showTab('buy')"><i class="fas fa-wallet"></i> Store </a></li>
+			<li><a href="#events" onclick="showTab('events')"><i class="fas fa-calendar-alt"></i> Events</a></li>
             <li><a href="#contact" onclick="showTab('contact')"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
     </nav>
-</header>
 
-<section id="home" class="tab-content">
-    <h2>Welcome to Student Hub</h2>
-    <div class="home-info">
-        <div class="card">
-            <h3><i class="fas fa-info-circle"></i> What is Student Hub?</h3>
-            <p>Student Hub is a centralized platform designed to help students explore events, academic collaborations, and networking opportunities. Whether you are looking for educational workshops, startup incubators, or student meetups, we’ve got you covered.</p>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-check-circle"></i> Why Use Student Hub?</h3>
-            <ul>
-                <li><i class="fas fa-calendar-check"></i> Discover exclusive student events</li>
-                <li><i class="fas fa-users"></i> Connect with peers and industry professionals</li>
-                <li><i class="fas fa-rocket"></i> Find research and startup collaboration opportunities</li>
-                <li><i class="fas fa-bell"></i> Get personalized recommendations</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-cogs"></i> How It Works?</h3>
-            <p>Simply browse by category, search for events, and start networking! Stay updated with real-time notifications and never miss an opportunity.</p>
-        </div>
+
+</header>
+<div class="tab-wrapper">
+<section id="home" class="tab-content new-home active">
+
+  <!-- Intro -->
+  <div class="home-block centered">
+   <h2 class="fade-in-left fade-delay-1"><i class="fas fa-lightbulb"></i> What is NoteNest?</h2>
+
+    <p class="description-card fade-in-left fade-delay-1">
+      NoteNest is your go-to platform for uploading and downloading study guides, earning points for contributions, and discovering valuable academic events. It's all about collaboration, learning, and rewards — all in one place.
+    </p>
+  </div>
+  <!-- Features Section -->
+  <div class="home-block features-layout">
+    <div class="features-card  fade-in-left fade-delay-1">
+     <h2 class="fade-in-left fade-delay-2"><i class="fas fa-star"></i> Features You’ll Love</h2>
+
+      <ul>
+        <li><i class="fas fa-upload"></i> Upload study guides & earn points</li>
+        <li><i class="fas fa-coins"></i> Spend or buy points to access premium content</li>
+        <li><i class="fas fa-calendar-alt"></i> Explore or host academic events</li>
+        <li><i class="fas fa-user"></i> View your profile, stats & guide ratings</li>
+      </ul>
     </div>
+  </div>
+
+  <!-- Points System -->
+  <div class="home-block centered">
+    <h2 class="fade-in-left fade-delay-3"><i class="fas fa-coins"></i> Points & Rewards</h2>
+
+    <div class="points-card fade-in-left fade-delay-3">
+      <ul>
+        <li><strong>+10 pts</strong> — Uploads rated 4⭐+ by 3+ users</li>
+        <li><strong>+10 bonus</strong> — If average rating is 4.5⭐+</li>
+        <li><strong>+5 pts</strong> — Every 50 downloads of your guide</li>
+        <li><strong>+20 / +50</strong> — Weekly / Monthly top contributor</li>
+        <li><strong>+15 pts</strong> — Verified Contributor</li>
+        <hr>
+        <li><strong>-5 to -15 pts</strong> — To download top-rated guides</li>
+        <li><strong>💳 Buy Points</strong> — Purchase points anytime</li>
+      </ul>
+    </div>
+  </div>
 </section>
+
+
+
 
 <section id="events" class="tab-content">
 	<h3>Explore & Search Events</h3>
@@ -189,110 +231,223 @@
 </button>
 
 <!-- Hidden Upload Form -->
-<div id="upload-dropdown" class="upload-dropdown hidden">
-  <h3>Upload Your Study Guide</h3>
-  <form id="upload-form">
-    <input type="text" id="guide-title" placeholder="Title" required><br>
-    <input type="text" id="university" placeholder="University" required><br>
-    <input type="text" id="course" placeholder="Course" required><br>
-    <input type="text" id="subject" placeholder="Subject" required><br>
-    <select id="format">
-      <option value="PDF">PDF</option>
-      <option value="Notes">Notes</option>
-      <option value="Flashcards">Flashcards</option>
-    </select><br>
-    <input type="file" id="file-upload" accept=".pdf,.docx,.txt" required><br>
-    <button type="submit">Upload</button>
-  </form>
-  <div id="upload-status"></div>
+<div id="upload-dropdown" class="upload-section">
+  <div class="upload-card">
+    <h3>Upload Your Study Guide</h3>
+    <form id="upload-form">
+      <input type="text" id="guide-title" placeholder="Title" required>
+      <input type="text" id="university" placeholder="University" required>
+	  <input type="text" id="faculty" placeholder="Faculty" required>
+      <input type="text" id="course" placeholder="Course" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+	  
+	   <select id="level">
+    <option value="">Select Level</option>
+    <option value="Beginner">Bachelor</option>
+    <option value="Intermediate">Master</option>
+    <option value="Advanced">PHD</option>
+  </select>
+
+  <select id="language">
+    <option value="">Select Language</option>
+    <option value="English">English</option>
+    <option value="Dutch">Dutch</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <input type="text" id="tags" placeholder="Tags (comma separated: e.g. marketing,finance)" />
+
+	<textarea id="description" placeholder="Short description (max 200 characters)" maxlength="200" rows="3" required></textarea>
+
+
+      <select id="format">
+        <option value="PDF">PDF</option>
+        <option value="DOCX">DOCX</option>
+        <option value="TXT">TXT</option>
+      </select>
+
+      <input type="file" id="file-upload" required>
+      <button type="submit" class="upload-btn">Upload</button>
+      <div id="upload-status"></div>
+    </form>
+  </div>
 </div>
 
-  <!-- Filters Bar -->
-  <div class="filters-bar">
-    <select id="university-filter">
-      <option>All Universities</option>
-      <option>HU University</option>
-      <option>Utrecht University</option>
-    </select>
-    <select id="faculty-filter">
-      <option>All Faculties</option>
-      <option>Business</option>
-      <option>Engineering</option>
-      <option>Health</option>
-    </select>
-    <select id="course-filter">
-      <option>All Courses</option>
-      <option>Marketing 101</option>
-      <option>Software Design</option>
-    </select>
-    <select id="subject-filter">
-      <option>All Subjects</option>
-      <option>Economics</option>
-      <option>Computer Science</option>
-    </select>
-    <select id="language-filter">
-      <option>All Languages</option>
-      <option>English</option>
-      <option>Dutch</option>
-    </select>
-    <select id="format-filter">
-      <option>All Formats</option>
-      <option>PDF</option>
-      <option>Notes</option>
-      <option>Flashcards</option>
-    </select>
-    <select id="level-filter">
-      <option>All Levels</option>
-      <option>Bachelor</option>
-      <option>Master</option>
-      <option>PhD</option>
-    </select>
-  </div>
 
-  <!-- Sort Bar -->
-  <div class="sort-bar">
-    <label for="sort-options">Sort by:</label>
-    <select id="sort-options">
-      <option value="relevant">Most Relevant</option>
-      <option value="downloads">Most Downloads</option>
-      <option value="rating">Highest Rating</option>
-      <option value="newest">Newest</option>
-      <option value="verified">Verified Authors</option>
-    </select>
-  </div>
+<div class="collab-layout">
+  <div class="collab-sidebar">
+    <!-- Filters Bar -->
+    <div class="filters-bar">
+      <div class="basic-filters">
+        <select id="university-filter">
+          <option>All Universities</option>
+          <option>HU University</option>
+          <option>Utrecht University</option>
+        </select>
+        <select id="course-filter">
+          <option>All Courses</option>
+          <option>Marketing 101</option>
+          <option>Software Design</option>
+        </select>
+        <select id="subject-filter">
+          <option>All Subjects</option>
+          <option>Economics</option>
+          <option>Computer Science</option>
+        </select><br>
 
-  <!-- Study Guides Grid -->
-  <div id="study-guide-list" class="guide-grid">
-    <!-- Sample Guide Card -->
-    <div class="guide-card">
-      <h3>Marketing 101 Midterm Summary</h3>
-      <p><strong>University:</strong> HU University</p>
-      <p><strong>Course:</strong> Marketing 101</p>
-      <p><strong>Subject:</strong> Economics</p>
-      <p><strong>Format:</strong> PDF</p>
-      <p><strong>Downloads:</strong> 128 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
-      <button class="download-btn">Download</button>
+        <button class="toggle-advanced-btn" onclick="toggleAdvancedFilters()">
+          More Filters ▼
+        </button>
+
+        <div class="advanced-filters collapsed">
+          <select id="faculty-filter">
+            <option>All Faculties</option>
+            <option>Business</option>
+            <option>Engineering</option>
+            <option>Health</option>
+          </select>
+
+          <select id="language-filter">
+            <option>All Languages</option>
+            <option>English</option>
+            <option>Dutch</option>
+          </select>
+
+          <select id="format-filter">
+            <option>All Formats</option>
+            <option>PDF</option>
+            <option>Notes</option>
+            <option>Flashcards</option>
+          </select>
+
+          <select id="level-filter">
+            <option>All Levels</option>
+            <option>Bachelor</option>
+            <option>Master</option>
+            <option>PhD</option>
+          </select>
+		  <select id="tag-filter">
+			<option>All Tags</option>
+			<option>Cheat Sheet</option>
+			<option>Exam Prep</option>
+			<option>Summary</option>
+			<option>Verified</option>
+		  </select>
+
+        </div> <!-- advanced-filters -->
+      </div> <!-- basic-filters -->
+    </div> <!-- filters-bar -->
+  </div> <!-- closes .collab-sidebar -->
+
+  <div class="collab-main">
+    <!-- Sort Bar -->
+    <div class="sort-bar">
+      <label for="sort-options">Sort by:</label>
+      <select id="sort-options">
+        <option value="relevant">Most Relevant</option>
+        <option value="downloads">Most Downloads</option>
+        <option value="rating">Highest Rating</option>
+        <option value="newest">Newest</option>
+        <option value="verified">Verified Authors</option>
+      </select>
+    </div> <!-- sort-bar -->
+
+    <!-- Study Guides Grid -->
+    <div class="guide-container">
+  <div id="study-guide-list" class="guide-list"></div>
+
+  <aside class="ad-sidebar">
+    <div class="ad-box">
+      <p>📢 Place your ad here</p>
+    </div>
+  </aside>
+</div>
+
+
+	  
+    </div> <!-- study-guide-list -->
+  </div> <!-- collab-main -->
+<!-- collab-layout -->
+
+<!-- Floating Upload Button -->
+<button class="floating-upload-btn" onclick="toggleUploadModal()">
+  <i class="fas fa-plus"></i>
+</button>
+
+<!-- Upload Modal -->
+<div id="upload-modal" class="upload-modal hidden">
+  <div class="modal-overlay" onclick="toggleUploadModal()"></div>
+  <div class="modal-content">
+    <h3>Upload Your Study Guide</h3>
+    <form id="upload-form">
+      <input type="text" id="guide-title" placeholder="Title" required><br>
+      <input type="text" id="university" placeholder="University" required><br>
+      <input type="text" id="course" placeholder="Course" required><br>
+      <input type="text" id="subject" placeholder="Subject" required><br>
+      <select id="format">
+        <option value="PDF">PDF</option>
+        <option value="Notes">Notes</option>
+        <option value="Flashcards">Flashcards</option>
+      </select><br>
+      <input type="file" id="file-upload" accept=".pdf,.docx,.txt" required><br>
+      <button type="submit">Upload</button>
+    </form>
+    <div id="upload-status"></div>
+  </div>
+</div>
+<!-- Review Modal -->
+<div id="review-modal" class="upload-modal hidden">
+  <div class="modal-overlay" onclick="closeReviewModal()"></div>
+  <div class="modal-content">
+    <h3>Rate This Guide</h3>
+    <p id="review-guide-title"></p>
+
+    <div class="rating-stars">
+      <span onclick="setRating(1)">★</span>
+      <span onclick="setRating(2)">★</span>
+      <span onclick="setRating(3)">★</span>
+      <span onclick="setRating(4)">★</span>
+      <span onclick="setRating(5)">★</span>
     </div>
 
-    <div class="guide-card">
-      <h3>Intro to Programming Notes</h3>
-      <p><strong>University:</strong> Utrecht University</p>
-      <p><strong>Course:</strong> Software Design</p>
-      <p><strong>Subject:</strong> Computer Science</p>
-      <p><strong>Format:</strong> Notes</p>
-      <p><strong>Downloads:</strong> 75 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
-      <button class="download-btn">Download</button>
+    <textarea id="review-comment" placeholder="Leave a comment (optional)"></textarea>
+    <button onclick="submitReview()">Submit Review</button>
+  </div>
+</div>
+
+
+</section>
+<section id="buy" class="tab-content">
+  <div class="card">
+    <h2><i class="fas fa-wallet"></i> Buy Points</h2>
+    <p>You can purchase points to unlock premium guides instantly.</p>
+
+    <div class="buy-options">
+      <button onclick="buyPoints(20)">Buy 20 Points - $1</button>
+      <button onclick="buyPoints(60)">Buy 60 Points - $3</button>
+      <button onclick="buyPoints(120)">Buy 120 Points - $5</button>
     </div>
+
+    <p class="note">*This is a mock system for demonstration purposes only. No actual payment is processed.</p>
   </div>
 </section>
+</div> 
 
 
 
+<!-- User Login/Profile Modal -->
+<div id="user-modal" class="upload-modal hidden">
+  <div class="modal-overlay" onclick="toggleUserModal()"></div>
+  <div class="modal-content">
+    <h3>User Profile</h3>
+    <input type="text" id="username" placeholder="Enter your username">
+    <button onclick="saveUser()">Save Profile</button>
+  </div>
+</div>
 
 <footer>
-    <p>&copy; 2025 Student Hub. All rights reserved.</p>
+    <p>&copy; 2025 NoteNest. All rights reserved.</p>
 </footer>
-
 <script src="script.js"></script>
 </body>
 </html>
